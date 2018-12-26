@@ -3,7 +3,7 @@ import cv2
 
 cap0 = cv2.VideoCapture(1)
 
-cap0.set(6,cv2.VideoWriter_fourcc(*'H264'))
+cap0.set(6,cv2.VideoWriter_fourcc(*'MJPG'))
 cap0.set(5,10)
 cap0.set(4,1920)
 cap0.set(3,1080)
@@ -13,11 +13,11 @@ cap0.set(3,1080)
 # cap3 = cv2.VideoCapture(4)
 
 # Define the codec and create VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+fourcc = cv2.VideoWriter_fourcc(*'H264')
 fps = 30
 size = (1920,1080)
 
-out = cv2.VideoWriter('output.mp4',fourcc, fps, size)
+out = cv2.VideoWriter('output.avi',fourcc, fps, size)
 
 while(cap0.isOpened()):
     ret0, frame0 = cap0.read()
