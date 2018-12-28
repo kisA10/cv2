@@ -1,23 +1,34 @@
 import numpy as np
 import cv2
+import datetime
 
-cap0 = cv2.VideoCapture(1)
+width = 1920
+height = 1080
+# width = 640
+# height = 480
 
-cap0.set(6,cv2.VideoWriter_fourcc(*'MJPG'))
-cap0.set(5,10)
-cap0.set(4,1920)
-cap0.set(3,1080)
+fourcc = cv2.VideoWriter_fourcc(*'h264')
+
+cap0 = cv2.VideoCapture(0)
+
+cap0.set(cv2.CAP_PROP_FOURCC,fourcc)
+cap0.set(cv2.CAP_PROP_FPS,30)
+cap0.set(cv2.CAP_PROP_FRAME_WIDTH,width)
+cap0.set(cv2.CAP_PROP_FRAME_HEIGHT,height)
 
 # cap1 = cv2.VideoCapture(1)
 # cap2 = cv2.VideoCapture(3)
 # cap3 = cv2.VideoCapture(4)
 
 # Define the codec and create VideoWriter object
-fourcc = cv2.VideoWriter_fourcc(*'H264')
-fps = 30
-size = (1920,1080)
 
-out = cv2.VideoWriter('output.avi',fourcc, fps, size)
+fps = 30
+size = (width,height)
+
+
+
+out = cv2.VideoWriter('/media/kis/data/output.mkv',fourcc, fps, size)
+# out = cv2.VideoWriter('output.avi',fourcc, fps, size)
 
 while(cap0.isOpened()):
     ret0, frame0 = cap0.read()
@@ -30,12 +41,20 @@ while(cap0.isOpened()):
         #frame = cv2.flip(frame1,0)
 
         # write the flipped frame
-        out.write(frame0)
+
+        time = datetime.datetime.now().strftime('%Y %m %d %H:%M:%S')
+        depth = 'depth : 1645'
+        # print(time)
+
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(frame0, time, (50, 50), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(frame0, depth, (50, 650), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
         cv2.imshow('frame0',frame0)
         # cv2.imshow('frame1',frame1)
         # cv2.imshow('frame2',frame2)
         # cv2.imshow('frame3',frame3)
+        # out.write(frame0)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     else:
