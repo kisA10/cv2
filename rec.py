@@ -51,6 +51,7 @@ while(cap0.isOpened()):
         cv2.putText(frame0, depth, (50, 650), font, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
         cv2.imshow('frame0',frame0)
+        cv2.moveWindow('frame0',0,0)
         # cv2.imshow('frame1',frame1)
         # cv2.imshow('frame2',frame2)
         # cv2.imshow('frame3',frame3)
