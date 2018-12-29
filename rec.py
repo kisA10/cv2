@@ -28,7 +28,7 @@ size = (width,height)
 
 
 # out = cv2.VideoWriter('/media/kis/data/output.mkv',fourcc, fps, size)
-out = cv2.VideoWriter('output.mkv',fourcc, fps, size)
+out = cv2.VideoWriter('G:\output.mkv',fourcc, fps, size)
 # out = cv2.VideoWriter('output.avi',fourcc, fps, size)
 
 while(cap0.isOpened()):
