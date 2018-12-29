@@ -7,7 +7,7 @@ height = 1080
 # width = 640
 # height = 480
 
-fourcc = cv2.VideoWriter_fourcc(*'h264')
+fourcc = cv2.VideoWriter_fourcc(*'H264')
 
 cap0 = cv2.VideoCapture(0)
 
@@ -27,7 +27,8 @@ size = (width,height)
 
 
 
-out = cv2.VideoWriter('/media/kis/data/output.mkv',fourcc, fps, size)
+# out = cv2.VideoWriter('/media/kis/data/output.mkv',fourcc, fps, size)
+out = cv2.VideoWriter('output.mkv',fourcc, fps, size)
 # out = cv2.VideoWriter('output.avi',fourcc, fps, size)
 
 while(cap0.isOpened()):
@@ -55,7 +56,7 @@ while(cap0.isOpened()):
         # cv2.imshow('frame1',frame1)
         # cv2.imshow('frame2',frame2)
         # cv2.imshow('frame3',frame3)
-        # out.write(frame0)
+        out.write(frame0)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     else:
