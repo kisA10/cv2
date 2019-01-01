@@ -1,12 +1,15 @@
 import numpy as np
 import cv2
 import datetime
+import threading
+from TestTimer import TestTimer
 
+testTimer = TestTimer()
 width = 1920
 height = 1080
 # width = 640
 # height = 480
-
+testTimer.start()
 fourcc = cv2.VideoWriter_fourcc(*'H264')
 
 cap0 = cv2.VideoCapture(0)
@@ -24,12 +27,13 @@ cap0.set(cv2.CAP_PROP_FRAME_HEIGHT,height)
 
 fps = 30
 size = (width,height)
+fourcc2 = cv2.VideoWriter_fourcc(*'h264')
 
 
-
-# out = cv2.VideoWriter('/media/kis/data/output.mkv',fourcc, fps, size)
-out = cv2.VideoWriter('G:\output.mkv',fourcc, fps, size)
+# out = cv2.VideoWriter('/media/kis/data/output_MPG4.mkv',fourcc2, fps, size)
+out = cv2.VideoWriter('G:\output.mkv',fourcc2, fps, size)
 # out = cv2.VideoWriter('output.avi',fourcc, fps, size)
+
 
 while(cap0.isOpened()):
     ret0, frame0 = cap0.read()
@@ -37,11 +41,13 @@ while(cap0.isOpened()):
     # ret2, frame2 = cap2.read()
     # ret3, frame3 = cap3.read()
 
-    
+
     if ret0==True:
         #frame = cv2.flip(frame1,0)
 
         # write the flipped frame
+
+
 
         time = datetime.datetime.now().strftime('%Y %m %d %H:%M:%S')
         depth = 'depth : 1645'
@@ -57,12 +63,14 @@ while(cap0.isOpened()):
         # cv2.imshow('frame2',frame2)
         # cv2.imshow('frame3',frame3)
         out.write(frame0)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q') :
             break
     else:
         break
 
 # Release everything if job is finished
+testTimer.stop()
+testTimer.printTime()
 cap0.release()
 # cap1.release()
 # cap2.release()
